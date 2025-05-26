@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+
+
+        //Un oggetto è una struttura di dati contenente una serie di coppie chiave valore 
+        //Ogni chiave identifica un dato che può essere di qualunque tipo. 
+        //Gli oggetti vengono adoperati per descrivere entità concrete o astratte 
+
+        let pizza = {
+            gusto : 'Margherita',
+            prezzo: 5,
+            "lista ingredienti" : [],
+            info : function(){
+                console.log('La pizza Margherita costa 5 euro');
+            }
+        };
+
+        
+        //Lettura di una proprietà 
+        console.log( pizza.gusto );
+        //Invocazione di un metodo 
+        pizza.info()
+
+        //Per fare questo esempio ho volutamente creato la proprietà lista ingredienti all'interno dell'oggetto pizza 
+        //Al fine di creare una proprietà che non è richiamabile con la dot notation
+        //Quando ti trovi in queste situazioni puoi usare la bracket notation. Passando direttamente sotto forma di stringa il nome della proprietà All'interno delle parentesi quadre  
+        pizza['lista ingredienti'];
+
+        //Quando utilizzi i document Prite stai chiedendo di mandare a schermo il dato che c'è tra le parentesi, ma questo provoca una conversione in stringa. Di conseguenza poi passare a document solo ed esclusivamente dati convertibili in stringa. 
+        document.write( pizza );
+        //Ecco perché in fase di sviluppo ti consiglio di usare console log per vedere lo stato di un oggetto in qualunque momento tu lo ritenga necessario 
+        console.log( pizza );
+        
+        
+        //Scrittura di proprietà 
+        pizza.gusto = 'Diavola';
+        console.log( pizza );
+
+        
+
+    </script>
+
+</body>
+</html>
