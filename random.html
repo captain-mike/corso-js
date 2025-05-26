@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+
+    function rand(max){
+        //max è Il numero piu grande che vuoi generare
+
+
+        //Math.floor() => Arrotonda per difetto, In questo caso il numero 10 non è più possibile. 
+        //(max + 1) Che vedi qui sotto è un'operazione che viene fatta per rendere nuovamente possibile i 10 
+        return Math.floor(Math.random() * (max + 1));
+    }
+
+    console.log(rand(50));
+    console.log(rand(100));
+    console.log(rand(7));
+
+    const n = new Array(10);
+
+    for (let index = 0; index < 10; index++) {
+        n[index] = Math.floor(Math.random() * (max + 1))
+    }
+
+    console.log(n);
+    
+       
+
+    </script>
+</body>
+</html>

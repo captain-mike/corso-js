@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <button id="stop">Stop</button>
+    <script>
+        let r = 0;            
+        let b = 255;            
+
+        function sfondoNero(){
+            document.body.style.backgroundColor = 'black';
+        }
+        
+        function sfondoRosso(){
+            r += 5
+            b -= 5
+            document.body.style.backgroundColor = "rgb(" + r + ",255, " + b + ")";
+        }
+
+        //setTimeout Esegue la funzione assegnata una sola volta dopo aver atteso il numero di millisecondi indicato 
+        setTimeout(sfondoNero, 2000);
+
+
+        //setInterval Esegue la funzione assegnata all'infinito finché non viene eventualmente stoppato da Clear interval. Ogni esecuzione della funzione ha un intervallo di tempo che è indicato in millisecondi. Quindi l'esempio che vedi qui sotto eseguirà la funzione sfondo rosso ogni 100 millisecondi 
+        let timer = setInterval(sfondoRosso, 100);
+        //Attenzione, la variabile timer, qui serve solo per poter identificare l'intervallo e stopparlo successivamente. 
+
+        //Da qui in poi stiamo creando la struttura per poter stoppare l'intervallo che abbiamo avviato alla riga 30. 
+        //Quindi per prima cosa andiamo a selezionare l'elemento con ID STOP (Il bottone )
+        const stop = document.getElementById('stop');
+
+        //Assegnamo la funzione stop animazione all'evento click sul bottone stop. 
+        stop.onclick = stoppaAnimazione;
+        
+        //La funzione stoppa animazione non fa altro che fermare l'intervallo legato alla variabile timer. 
+        function stoppaAnimazione(){
+            clearInterval(timer)
+        }
+
+    </script>
+
+</body>
+</html>

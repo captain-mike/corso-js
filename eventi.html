@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    
+    <button id="test">Clicca qui</button>
+
+    <script>
+        
+        const test =  document.getElementById('test');
+        
+        console.dir(test);
+
+        function saluta(){
+            alert('eseguita')
+        } 
+
+        //Per assegnare ad un evento Ricordati che un elemento del DOM è un oggetto che ha tutte le proprietà legate agli eventi 
+        //Ad esempio, on Click è un attributo che ti permette di assegnare ad un elemento una funzione che verrà eseguita al click 
+        test.onclick = saluta;//La funzione legata all'evento deve ovviamente esistere e non importa se è stata dichiarata più in basso o più in alto. 
+
+        //Best practice : Oggi un sistema più moderno è quello di utilizzare addEventListener
+        test.addEventListener('click',saluta)
+        test.removeEventListener('click',saluta)
+                        
+
+    </script>
+
+</body>
+</html>
