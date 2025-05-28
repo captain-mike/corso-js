@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      background-color: aqua;
+      padding: 20px;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      color: white;
+      font-weight: bold;
+    }
+    table {
+      background-image: url('sfondo.jpg');
+      background-size: auto 600px;
+      width: 100%;
+      padding: 50px;
+      margin: 0 auto;
+      border-collapse: collapse;
+      text-align: center;
+    }
+    /* Card interattivo */
+    #hover-card {
+      width: 688px;
+      height: 259px;
+      background-image: url('biglietto1.jpg');
+      background-size: cover;
+      text-align: center;
+      margin: 0 auto;
+    }
+    #hover-card:hover {
+      background-image: url('biglietto2.jpg');
+    }
+    #hover-card p:first-of-type {
+      color: #000;
+      font-size: 15px;
+    }
+    #hover-card p:last-of-type {
+      color: #000;
+      text-align: right;
+    }
+    /* Blocco inferiore sinistro */
+    #block2 {
+      width: 570px;
+      height: 200px;
+      text-align: center;
+      font-family: 'Arial Black', sans-serif;
+      color: #D0AAFE;
+      font-size: 25px;
+    }
+    #circle {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: #00AA1F;
+      display: inline-block;
+      line-height: 100px;
+      font-size: 15px;
+      color: white;
+      margin-top: 10px;
+      text-align: center;
+    }
+    /* Blocco inferiore destro */
+    #hero-container {
+      text-align: right;
+      font-weight: bold;
+      font-size: 25px;
+    }
+    #hero-input {
+      width: 200px;
+      height: 50px;
+      border-radius: 10px;
+      font-size: 15px;
+      background-color: #ffffff;
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+<body>
+<table>
+    <tr>
+      <!-- Cella in alto a sinistra -->
+      <td>
+        <div class="hover-div">
+          <!-- 11 a capo -->
+          <br><br><br><br><br><br><br><br><br><br><br>
+          <p>Questo è il primo paragrafo</p>
+          <p>Questo è il secondo paragrafo</p>
+        </div>
+      </td>
+      <!-- Cella in alto a destra -->
+      <td>
+        <div class="top-right-div">
+          <!-- 6 a capo -->
+          <br><br><br><br><br><br>
+          scrivi il tuo nome&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <input name="nome-giocatore" type="text" placeholder="Nome">
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <!-- Cella in basso a sinistra -->
+      <td>
+        <div class="bottom-left-div">
+          <!-- 3 a capo -->
+          <br><br><br>
+          <button id="stop">Ferma</button>
+          <button id="estrai">Estrai</button>
+          <div id="biglietti"></div>
+        </div>
+      </td>
+      <!-- Cella in basso a destra (vuota) -->
+      <td></td>
+    </tr>
+  </table>
+
+  <script>
+
+    let red = 0;
+    let blue = 255;
+    let timerEstrazioni;
+    let combinazioneVincente = '';
+
+
+    function stepAnimaSfondoBody(){
+
+            red += 5;
+            blue -= 5;
+            
+            window.document.body.style.backgroundColor = "rgb("+red+",255,"+blue+")";
+    }
+
+    function estrazioni(){
+
+        timerEstrazioni = setInterval(creaBiglietto, 2000);
+    }
+
+
+    function ferma(){
+        clearInterval(timerEstrazioni)
+    }
+
+    function estrai(){
+        setTimeout(estrazioni, 1000);
+    }
+    
+    function creaBiglietto(){
+        //Genero la combinazione. 
+        let combinazione = new Array(6);
+        
+        for(let i = 0; i < combinazione.length; i++){
+            let rand = Math.floor(Math.random() * 10);
+            combinazione[i] = rand;
+        }
+
+        //Verifico se la combinazione è quella vincente e modifico il testo in base al risultato
+        let somma1 = combinazione[0] + combinazione[1] +  combinazione[2]; 
+        let somma2 = combinazione[3] + combinazione[4] +  combinazione[5];
+        
+        let testobiglietto;
+        if(somma1 == somma2){
+            testobiglietto = 'Biglietto Fortunato';
+            combinazioneVincente += combinazione[0] + combinazione[1] +  combinazione[2] + combinazione[3] + combinazione[4] +  combinazione[5]
+            vittoria();
+        }else{
+            testobiglietto = 'Biglietto Normale';
+        }
+        
+        let id = "biglietto" +  combinazione[0] + combinazione[1] +  combinazione[2] + combinazione[3] + combinazione[4] +  combinazione[5]
+
+        let biglietti = window.document.getElementById('biglietti');
+        biglietti.innerHTML += "<div id=" + id + ">" + testobiglietto + "<div>"+combinazione+"</div></div>";
+
+        setTimeout(function(){
+            eliminaBiglietto(id)
+        }, 3000)
+        
+    }
+
+    function vittoria(){
+        let nomeGiocatore = window.document.getElementById('nome-giocatore').value;
+        //Utilizza la variabile combinazione vincente 
+    }
+
+    function eliminaBiglietto(id){
+        let biglietto = document.getElementById(id)
+        biglietto.remove()
+    }
+
+    function init(){
+
+        setInterval(stepAnimaSfondoBody,100);
+        setTimeout(estrazioni, 1000);
+
+
+        let bottoneFerma = window.document.getElementById('stop');
+        bottoneFerma.onclick = ferma;
+
+        let bottoneEstrai = window.document.getElementById('estrai');
+        bottoneEstrai.onclick = estrai;
+
+    }
+
+
+    window.onload = init;
+
+  </script>
+</body>
+</html>
